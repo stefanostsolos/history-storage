@@ -1,0 +1,75 @@
+1. Small Configuration (2000 RAM Capacity):
+
+a) H94L80:
+   - Write Speed: 55,025.78 entries/second
+   - Read Speed: 282,989.50 entries/second
+   - Final RAM/DB split: 1900/8100
+   - Total flushes: 27
+
+b) H97L84:
+   - Write Speed: 54,613.17 entries/second
+   - Read Speed: 323,666.49 entries/second
+   - Final RAM/DB split: 1909/8091
+   - Total flushes: 31
+
+c) H98L90:
+   - Write Speed: 54,888.06 entries/second
+   - Read Speed: 352,572.01 entries/second
+   - Final RAM/DB split: 1900/8100
+   - Total flushes: 45
+
+Analysis: For the small configuration, increasing the watermarks led to more flushes but also improved read speeds. Write speeds remained relatively consistent. The higher watermarks allowed for slightly more entries in RAM.
+
+2. Medium Configuration (5000 RAM Capacity):
+
+a) H94L80:
+   - Write Speed: 75,448.92 entries/second
+   - Read Speed: 514,509.16 entries/second
+   - Final RAM/DB split: 4750/5250
+   - Total flushes: 7
+
+b) H97L84:
+   - Write Speed: 65,461.31 entries/second
+   - Read Speed: 338,283.55 entries/second
+   - Final RAM/DB split: 4792/5208
+   - Total flushes: 8
+
+c) H98L90:
+   - Write Speed: 72,301.35 entries/second
+   - Read Speed: 370,438.97 entries/second
+   - Final RAM/DB split: 4600/5400
+   - Total flushes: 12
+
+Analysis: The medium configuration showed more varied results. Surprisingly, the H94L80 setting performed best in both write and read speeds. Higher watermarks increased the number of flushes but didn't consistently improve performance.
+
+3. Large Configuration (10000 RAM Capacity):
+
+a) H94L80:
+   - Write Speed: 87,820.21 entries/second
+   - Read Speed: 186,056.90 entries/second
+   - Final RAM/DB split: 8500/1500
+   - Total flushes: 1
+
+b) H97L84:
+   - Write Speed: 70,667.38 entries/second
+   - Read Speed: 184,607.43 entries/second
+   - Final RAM/DB split: 8699/1301
+   - Total flushes: 1
+
+c) H98L90:
+   - Write Speed: 98,871.87 entries/second
+   - Read Speed: 255,076.01 entries/second
+   - Final RAM/DB split: 9100/900
+   - Total flushes: 1
+
+Analysis: For the large configuration, higher watermarks clearly improved performance. The H98L90 setting showed the best write and read speeds, and kept the most entries in RAM.
+
+Overall observations:
+1. Higher watermarks generally led to more entries being kept in RAM, especially noticeable in the large configuration.
+2. The impact of watermark settings varies with RAM capacity. For smaller capacities, it mainly affects the number of flushes, while for larger capacities, it significantly impacts performance.
+3. Write speeds generally improved with larger RAM capacities.
+4. Read speeds don't always correlate directly with RAM capacity or watermark settings, suggesting other factors (like caching or data organization) play a role.
+5. The large configuration with H98L90 settings showed the best overall performance for this data size.
+
+Recommendation:
+For 10,000 entries, the large configuration (10000 RAM Capacity) with H98L90 watermarks appears to be the most efficient, providing the best balance of write speed, read speed, and RAM utilization. However, if RAM is constrained, the medium configuration with H94L80 settings also performs well, especially for read operations.

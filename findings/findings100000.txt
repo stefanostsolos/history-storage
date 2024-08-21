@@ -1,0 +1,85 @@
+1. Small Configuration (2000 RAM Capacity):
+
+a) H94L80:
+   - Write Speed: 48,288.53 entries/second
+   - Read Speed: 216,293.38 entries/second
+   - Final RAM/DB split: 1900/98100
+   - Total flushes: 327
+
+b) H97L84:
+   - Write Speed: 49,162.52 entries/second
+   - Read Speed: 218,538.15 entries/second
+   - Final RAM/DB split: 1864/98136
+   - Total flushes: 376
+
+c) H98L90:
+   - Write Speed: 44,867.64 entries/second
+   - Read Speed: 240,212.54 entries/second
+   - Final RAM/DB split: 1900/98100
+   - Total flushes: 545
+
+Analysis: For the small configuration, H97L84 performed slightly better in write speed, while H98L90 had the best read speed. However, H98L90 also had significantly more flushes, which impacted its write performance.
+
+2. Medium Configuration (5000 RAM Capacity):
+
+a) H94L80:
+   - Write Speed: 50,579.21 entries/second
+   - Read Speed: 373,819.20 entries/second
+   - Final RAM/DB split: 4750/95250
+   - Total flushes: 127
+
+b) H97L84:
+   - Write Speed: 58,363.83 entries/second
+   - Read Speed: 370,965.29 entries/second
+   - Final RAM/DB split: 4303/95697
+   - Total flushes: 147
+
+c) H98L90:
+   - Write Speed: 56,813.63 entries/second
+   - Read Speed: 327,844.13 entries/second
+   - Final RAM/DB split: 4600/95400
+   - Total flushes: 212
+
+Analysis: H97L84 performed best in write speed, while H94L80 had a slight edge in read speed. H98L90 had more flushes but maintained a good balance between RAM and DB storage.
+
+3. Large Configuration (10000 RAM Capacity):
+
+a) H94L80:
+   - Write Speed: 65,242.89 entries/second
+   - Read Speed: 337,898.34 entries/second
+   - Final RAM/DB split: 8500/91500
+   - Total flushes: 61
+
+b) H97L84:
+   - Write Speed: 60,969.92 entries/second
+   - Read Speed: 391,579.47 entries/second
+   - Final RAM/DB split: 8930/91070
+   - Total flushes: 70
+
+c) H98L90:
+   - Write Speed: 57,490.23 entries/second
+   - Read Speed: 332,583.91 entries/second
+   - Final RAM/DB split: 9100/90900
+   - Total flushes: 101
+
+Analysis: H94L80 had the best write speed, while H97L84 excelled in read speed. H98L90 kept the most entries in RAM but had more flushes.
+
+Overall observations:
+1. Larger RAM capacities consistently provided better write and read speeds across all watermark settings.
+2. The impact of watermark settings varies with RAM capacity:
+   - For small RAM, higher watermarks led to more flushes and slightly improved read speeds.
+   - For medium RAM, H97L84 offered the best balance of write and read performance.
+   - For large RAM, lower watermarks (H94L80) performed better in write operations, while higher watermarks (H97L84) excelled in read operations.
+3. The number of flushes increased significantly with higher watermarks, especially in smaller RAM configurations.
+4. Read speeds were generally much higher than write speeds across all configurations.
+5. Disk usage varied between configurations, with H98L90 generally using less disk space due to keeping more entries in RAM.
+
+Recommendations:
+1. For systems with limited RAM (small configuration), H97L84 offers the best balance between write and read performance.
+2. For medium-sized RAM, H97L84 is the most efficient overall, providing the best write speed and near-best read speed.
+3. For large RAM configurations, the choice depends on the priority:
+   - If write speed is crucial, H94L80 is preferable.
+   - If read speed is more important, H97L84 is the better choice.
+4. If minimizing the number of flushes is a priority (e.g., to reduce wear on SSDs), lower watermarks are preferable, especially for smaller RAM capacities.
+
+In conclusion, for handling 100,000 entries, the medium or large configuration with H97L84 settings appears to be the most efficient overall, providing a good balance of write speed, read speed, and RAM utilization. However, the optimal choice may depend on specific use case priorities (e.g., favoring read or write operations) and available hardware resources.
