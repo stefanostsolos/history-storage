@@ -22,7 +22,7 @@ This project implements a history storage system with in-memory and on-disk comp
    cd build
    ```
 
-3. Run CMake and build the project (you may need to use different commands for building depending on your working environment/):
+3. Run CMake and build the project (you may need to use different commands for building depending on your working environment):
    ```
    cmake ..
    make
